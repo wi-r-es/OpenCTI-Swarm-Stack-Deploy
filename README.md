@@ -32,3 +32,5 @@ Still findind fixes for problem.
 # Note
 Change MinIO image to alpine/minio:RELEASE.2025-10-15T17-29-55Z due to the following issue:
 - https://github.com/minio/minio/issues/21647
+
+Only tested in single node swarm.
