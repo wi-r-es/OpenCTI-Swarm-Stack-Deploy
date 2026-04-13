@@ -18,7 +18,7 @@ cp .env.sample .env
 # Validate #
 ############
 if [[ ! -f "$ENV_FILE" ]]; then
-  echo "Error: .env file not found in the current directory."
+  echo "Error: .env.sample file not found in the current directory."
   exit 1
 fi
 
@@ -30,17 +30,17 @@ BASE64_KEY=$(printf '%s' "$SECRET_KEY" | base64 -w 0)
 ############################
 # Replace <base64_enc_key> #
 ############################
-sed -i "s|<base64_enc_key>|${BASE64_KEY}|g" "$ENV_FILE"
+sed -i "s|<base64_enc_key>|${BASE64_KEY}|g" ".env"
 echo "Replaced <base64_enc_key> with base64-encoded secret."
 
 #############################################
 # Replace every <UUIDv4> with a unique UUID #
 #############################################
 count=0
-while grep -q '<UUIDv4>' "$ENV_FILE"; do
+while grep -q '<UUIDv4>' ".env"; do
   uuid=$(cat /proc/sys/kernel/random/uuid)
-  sed -i "0,/<UUIDv4>/{s/<UUIDv4>/${uuid}/}" "$ENV_FILE"
-  ((count++))
+  sed -i "0,/<UUIDv4>/{s/<UUIDv4>/${uuid}/}" ".env"
+  count=$((count + 1))
 done
 
 echo "Generated and replaced ${count} UUIDv4 value(s)."
