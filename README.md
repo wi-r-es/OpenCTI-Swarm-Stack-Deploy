@@ -23,9 +23,7 @@ Add parameter to the end of sysctl.conf file
 # Check services creation
 - `docker stack services opencti` OR `docker service ls`
 
-# Troubleshoot any container not initiating
-During dpeloyment test some containers where not initiating properly. 
-Still findind fixes for problem.
+# Troubleshoot any container that did not converge
 ## Run the following command for each service not initiated
 - `docker service update --force <container_name>`
 
